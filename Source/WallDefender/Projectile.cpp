@@ -13,6 +13,8 @@ AProjectile::AProjectile()
 	RootComponent = MeshComp;
  	MeshComp->SetMobility(EComponentMobility::Movable);
  	MeshComp->SetStaticMesh(ProjectileMesh.Object);
+	MeshComp->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	MeshComp->SetNotifyRigidBodyCollision(true);
 
 }
 
@@ -27,7 +29,9 @@ void AProjectile::BeginPlay()
 void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	FVector ProcessingLocation = GetActorLocation();
+	ProcessingLocation += velocity;
+	SetActorLocation(ProcessingLocation);
 }
 
 // Called to bind functionality to input
@@ -35,5 +39,10 @@ void AProjectile::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AProjectile::SetVelocity(FVector _velocity)
+{
+	velocity = _velocity;
 }
 

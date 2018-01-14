@@ -44,10 +44,14 @@ void ABaseDefenderController::OnReleaseBow()
 
 		FVector SpawnLocation = GetPawn()->GetActorLocation();
 		SpawnLocation.X += 100.0f;
-
-		FRotator SpawnRotation = GetPawn()->GetActorRotation();
+		
+		FRotator SpawnRotation = (Hit.ImpactPoint - SpawnLocation).Rotation();
 		FActorSpawnParameters SpawnInfo;
-		GetWorld()->SpawnActor<AProjectile>(SpawnLocation, SpawnRotation, SpawnInfo);
+		AProjectile *LaunchedArrow = GetWorld()->SpawnActor<AProjectile>(SpawnLocation, SpawnRotation, SpawnInfo);
+		FVector ArrowVelocity = LaunchedArrow->GetActorForwardVector();
+		ArrowVelocity *= BowCurrentVelocity;
+		LaunchedArrow->SetVelocity(ArrowVelocity);
+		
 	}
 	else
 	{
