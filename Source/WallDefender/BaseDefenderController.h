@@ -22,9 +22,7 @@ protected:
 	void Tick(float Duration) override;
 	
 protected:
-	void Tick(float num) override;
-	
-	
+
 	
 public:
 	ABaseDefenderController();

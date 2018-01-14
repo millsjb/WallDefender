@@ -14,8 +14,7 @@ AProjectile::AProjectile()
  	MeshComp->SetMobility(EComponentMobility::Movable);
  	MeshComp->SetStaticMesh(ProjectileMesh.Object);
 	MeshComp->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	MeshComp->SetNotifyRigidBodyCollision(true);
-
+	MeshComp->SetCollisionProfileName("Default");
 }
 
 // Called when the game starts or when spawned

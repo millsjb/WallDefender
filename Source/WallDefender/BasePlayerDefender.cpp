@@ -26,8 +26,8 @@ void ABasePlayerDefender::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	FVector currLoc = this->GetActorLocation();
-	currLoc.X += 1.0f;
-	this->SetActorLocation(currLoc);
+	currLoc.Y += 1.0f;
+//	this->SetActorLocation(currLoc);
 
 }
 
