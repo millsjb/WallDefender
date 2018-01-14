@@ -10,32 +10,32 @@
 
 
 /**
- * 
- */
+*
+*/
 UCLASS()
 class WALLDEFENDER_API ABaseAIController : public AAIController
 {
 	GENERATED_BODY()
 
+		UPROPERTY(transient)
+		UBlackboardComponent* BlackboardComp;
+
 	UPROPERTY(transient)
-	UBlackboardComponent* BlackboardComp;
-		
-	UPROPERTY(transient)
-	UBehaviorTreeComponent* BehaviorComp;
-	
+		UBehaviorTreeComponent* BehaviorComp;
+
 	virtual void Posses(class APawn *InPawn);
 
 	void SetEnemy(class APawn *InPawn);
 
 	UFUNCTION(BlueprintCallable, Category = Behavior)
-	void SearchForEnemy();
+		void SearchForEnemy();
 
 public:
 	ABaseAIController(const FObjectInitializer &FOI);
 
 protected:
-	uint8 EnemyKeyID;
-	uint8 EnemyLocationID;
+	FName EnemyKeyID;
+	FName EnemyLocationID;
 
 
 
