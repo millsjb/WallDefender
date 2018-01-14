@@ -14,6 +14,8 @@ class WALLDEFENDER_API ABaseDefenderController : public APlayerController
 {
 	GENERATED_BODY()
 	
+protected:
+	void Tick(float num) override;
 	
 	
 	

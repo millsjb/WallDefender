@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BasePlayerDefender.h"
+#include "BaseDefenderController.h"
 
 
 // Sets default values
@@ -22,6 +23,10 @@ void ABasePlayerDefender::BeginPlay()
 void ABasePlayerDefender::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	FVector currLoc = this->GetActorLocation();
+	currLoc.X += 1.0f;
+	this->SetActorLocation(currLoc);
 
 }
 

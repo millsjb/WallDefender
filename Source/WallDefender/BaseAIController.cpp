@@ -13,24 +13,34 @@ ABaseAIController::ABaseAIController(const FObjectInitializer &FOI)
 
 void ABaseAIController::Posses(class APawn* InPawn)
 {
+	UE_LOG(LogTemp, Warning, TEXT("In Possess"));
 	Super::Possess(InPawn);
 	ABaseAIAttacker* Bot = Cast<ABaseAIAttacker>(InPawn);
 	if (Bot != nullptr && Bot->BotBehavior != nullptr)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("My pawn or its behavior is NOT null :("));
+
 		BlackboardComp->InitializeBlackboard(*(Bot->BotBehavior->BlackboardAsset));
 
-		EnemyKeyID.SetNumber(BlackboardComp->GetKeyID("Enemy"));
-		EnemyLocationID.SetNumber(BlackboardComp->GetKeyID("Destination"));
+		EnemyKeyID = BlackboardComp->GetKeyID("Enemy");
+		EnemyLocationID = BlackboardComp->GetKeyID("Destination");
 
 		BehaviorComp->StartTree(*(Bot->BotBehavior));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("My pawn or its behavior is null :("));
 	}
 }
 
 void ABaseAIController::SearchForEnemy()
 {
+	UE_LOG(LogTemp, Warning, TEXT("In search for enemy"));
+
 	APawn* MyBot = GetPawn();
 	if (MyBot == NULL)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Can't search for enemy as my pawn is null :("));
 		return;
 	}
 
@@ -58,11 +68,28 @@ void ABaseAIController::SearchForEnemy()
 	{
 		SetEnemy(BestPawn);
 	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Can't find an enemy to search for :("));
+	}
 
 }
 
 void ABaseAIController::SetEnemy(class APawn *InPawn)
 {
-	BlackboardComp->SetValueAsObject(EnemyKeyID, InPawn);
-	BlackboardComp->SetValueAsVector(EnemyLocationID, InPawn->GetActorLocation());
+	BlackboardComp->SetValueAsObject("Enemy", InPawn);
+	BlackboardComp->SetValueAsVector("Destination", InPawn->GetActorLocation());
+}
+
+void ABaseAIController::Tick(float num)
+{
+	APawn* MyBot = GetPawn();
+
+	FVector currLoc = MyBot->GetActorLocation();
+	currLoc.X -= 1.0f;
+	MyBot->SetActorLocation(currLoc);
+
+
+	ABaseAIAttacker* attacker = dynamic_cast<ABaseAIAttacker*>(MyBot);
+
 }
