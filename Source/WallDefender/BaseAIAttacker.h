@@ -14,18 +14,22 @@ class WALLDEFENDER_API ABaseAIAttacker : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ABaseAIAttacker();
+	ABaseAIAttacker(const FObjectInitializer &FOI);
+
+	UPROPERTY(EditAnywhere, Category = Behave)
+		class UBehaviorTree* BotBehavior;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
-	
+
+
 };
