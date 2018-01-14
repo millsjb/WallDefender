@@ -10,8 +10,8 @@
 
 
 /**
- * 
- */
+*
+*/
 UCLASS()
 class WALLDEFENDER_API ABaseAIController : public AAIController
 {
@@ -19,10 +19,10 @@ class WALLDEFENDER_API ABaseAIController : public AAIController
 
 	UPROPERTY(transient)
 	UBlackboardComponent* BlackboardComp;
-		
+
 	UPROPERTY(transient)
 	UBehaviorTreeComponent* BehaviorComp;
-	
+
 	virtual void Posses(class APawn *InPawn);
 
 	void SetEnemy(class APawn *InPawn);
@@ -36,6 +36,8 @@ public:
 protected:
 	uint8 EnemyKeyID;
 	uint8 EnemyLocationID;
+
+	void Tick(float num) override;
 
 
 

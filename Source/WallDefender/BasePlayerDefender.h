@@ -26,6 +26,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
-	
+	float GetBowMaxVelocity();
+	float GetBowVelocityScale();
+
+private:
+	float MoveSpeed;
+	float BowMaxVelocity;
+	float BowVelocityScale;
+	float BowCurrentVelocity;
 };
